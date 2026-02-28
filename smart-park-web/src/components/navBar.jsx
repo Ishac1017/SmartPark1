@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+import LoginButton from "./LoginButton.jsx";
+import LogoutButton from "./LogoutButton.jsx";
 
 export default function NavBar() {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -18,17 +20,13 @@ export default function NavBar() {
       </Link>
 
       {isAuthenticated ? (
-        <div style={{ display: "flex", gap: 15 }}>
+        <>
           <span>Hello, {user.name}</span>
-          <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-            Log Out
-          </button>
+          <LogoutButton />
           <Link to="/dashboard">Dashboard</Link>
-        </div>
+        </>
       ) : (
-        <button onClick={() => loginWithRedirect()}>
-          Log In / Sign Up
-        </button>
+        <LoginButton />
       )}
     </div>
   );

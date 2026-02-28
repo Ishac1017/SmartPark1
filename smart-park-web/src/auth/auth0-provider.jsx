@@ -6,7 +6,7 @@ export default function Auth0ProviderWrapper({ children }) {
   const navigate = useNavigate();
 
   const domain = "dev-15wlbz2zgyxtixng.us.auth0.com";
-  const clientId = "8cuUfr1xy41JYClACsz775HEVdw4OR1e";
+  const clientId = "bVx9ChslujHMBdHczaP0v6OLAay8nMmn";
 
   const onRedirectCallback = (appState) => {
     navigate(appState?.returnTo || "/");

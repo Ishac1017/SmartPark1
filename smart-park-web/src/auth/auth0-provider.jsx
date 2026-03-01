@@ -1,16 +1,9 @@
 import React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
 
 export default function Auth0ProviderWrapper({ children }) {
-  const navigate = useNavigate();
-
-  const domain = "dev-15wlbz2zgyxtixng.us.auth0.com";
-  const clientId = "bVx9ChslujHMBdHczaP0v6OLAay8nMmn";
-
-  const onRedirectCallback = (appState) => {
-    navigate(appState?.returnTo || "/");
-  };
+  const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+  const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
   return (
     <Auth0Provider
@@ -19,7 +12,10 @@ export default function Auth0ProviderWrapper({ children }) {
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
-      onRedirectCallback={onRedirectCallback}
+      onRedirectCallback={(appState) => {
+        const returnPath = appState?.returnTo || "/post-auth";
+        window.history.replaceState({}, document.title, returnPath);
+      }}
     >
       {children}
     </Auth0Provider>

@@ -15,6 +15,10 @@ createRoot(document.getElementById("root")).render(
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
+      onRedirectCallback={(appState) => {
+        const returnPath = appState?.returnTo || "/post-auth";
+        window.history.replaceState({}, document.title, returnPath);
+      }}
     >
       <App />
     </Auth0Provider>

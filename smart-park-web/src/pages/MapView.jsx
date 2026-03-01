@@ -17,19 +17,17 @@ export default function MapView() {
     </main>
   );
 
-  // If we have lat/lon from Geoapify, use them. Otherwise fallback to name search.
-  const mapUrl = spot.lat && spot.lon 
-    ? `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${spot.lat},${spot.lon}`
-    : `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(spot.name + " " + (spot.address || ""))}`;
-
   // Since I don't have a Google Maps API Key here, I'll use the search-based embed which doesn't always require a key for basic usage in some contexts, 
   // or use the standard embed with query.
   const simpleMapUrl = `https://maps.google.com/maps?q=${spot.lat || 0},${spot.lon || 0}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
-    <main className="screen">
+    <main className="screen" style={{ 
+      background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
+      minHeight: "100vh"
+    }}>
       <NavBar />
-      <div className="page-container">
+      <div className="page-container" style={{ zIndex: 2 }}>
         <div className="page-header">
           <div className="brand-chip">
             <div className="brand-icon">🚗</div>
@@ -40,7 +38,7 @@ export default function MapView() {
         </div>
 
         <div className="route-grid">
-          <section className="panel" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <section style={{ display: "flex", flexDirection: "column", gap: "24px", padding: "24px" }}>
             <div className="selected-card">
               <h3 className="selected-name">{spot.name}</h3>
               <p style={{ color: "#6b7280" }}>{spot.address || "123 Destination Way"}</p>
@@ -61,16 +59,16 @@ export default function MapView() {
                 <strong>${spot.price}/hr</strong>
               </div>
             </div>
-
-            <div className="button-row" style={{ marginTop: "auto", display: "grid", gap: "12px" }}>
-              <button className="primary-btn" style={{ width: "100%" }} onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lon}`, "_blank")}>
-                Open in Google Maps
-              </button>
-              <button className="secondary-btn" style={{ width: "100%" }} onClick={() => navigate("/results", { state: { lat: spot.lat, lon: spot.lon, name: "Previous Location" } })}>
-                Change Destination
-              </button>
-            </div>
           </section>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginTop: "40px", paddingBottom: "40px" }}>
+            <button className="primary-btn" style={{ minWidth: "240px", padding: "18px", fontSize: "1rem", borderRadius: "14px" }} onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lon}`, "_blank")}>
+              Open in Google Maps
+            </button>
+            <button className="secondary-btn" style={{ minWidth: "240px", padding: "18px", fontSize: "1rem", borderRadius: "14px" }} onClick={() => navigate("/results", { state: { lat: spot.lat, lon: spot.lon, name: "Previous Location" } })}>
+              Change Destination
+            </button>
+          </div>
 
           <div className="map-card" style={{ height: "100%", minHeight: "400px", borderRadius: "24px", overflow: "hidden", boxShadow: "var(--shadow)" }}>
             <iframe
@@ -82,6 +80,8 @@ export default function MapView() {
             ></iframe>
           </div>
         </div>
+
+        
       </div>
     </main>
   );

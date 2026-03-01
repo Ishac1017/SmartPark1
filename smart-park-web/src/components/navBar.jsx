@@ -4,39 +4,37 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const { isAuthenticated, user, logout } = useAuth0();
+  const activeSession = localStorage.getItem("activeParkingSession");
 
   return (
     <header className="nav-header">
-      <div style={{ maxWidth: "1400px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <div className="brand-icon" style={{ width: "32px", height: "32px", fontSize: "16px" }}>P</div>
-            <span style={{ fontWeight: 800, fontSize: "1.5rem", letterSpacing: "-0.03em", color: "#111827" }}>SmartPark</span>
-          </div>
-        </Link>
-        
-        <nav style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          {isAuthenticated ? (
-            <>
+      <nav style={{ display: "flex", gap: "16px", alignItems: "center", marginLeft: "auto" }}>
+        {isAuthenticated ? (
+          <>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "4px 12px", background: "rgba(255,255,255,0.5)", borderRadius: "12px", border: "1px solid var(--border)" }}>
               <div style={{ textAlign: "right", display: "flex", flexDirection: "column" }}>
-                <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#111827" }}>{user?.name}</span>
+                <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text-main)" }}>{user?.name}</span>
               </div>
-              <button
-                className="secondary-btn"
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                style={{ padding: "10px 20px" }}
-              >
-                Log out
-              </button>
-            </>
-          ) : (
-            <Link to="/auth" className="primary-btn" style={{ textDecoration: "none" }}>
-              Get Started
-            </Link>
-          )}
-        </nav>
-      </div>
+              <img 
+                src={user?.picture} 
+                alt={user?.name} 
+                style={{ width: "32px", height: "32px", borderRadius: "8px", border: "1px solid var(--border)" }}
+              />
+            </div>
+            <button
+              className="secondary-btn"
+              onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+              style={{ padding: "8px 16px", fontSize: "0.85rem", borderRadius: "8px" }}
+            >
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <Link to="/auth" className="primary-btn" style={{ padding: "10px 20px", fontSize: "0.85rem", textDecoration: "none", borderRadius: "8px" }}>
+            Get Started
+          </Link>
+        )}
+      </nav>
     </header>
   );
 }
-

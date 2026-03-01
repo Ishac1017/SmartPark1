@@ -10,6 +10,8 @@ import AddVehicle from "./pages/AddVehicle";
 import Search from "./pages/Search";
 import Results from "./pages/Results";
 import MapView from "./pages/MapView";
+import ScanParking from "./pages/ScanParking";
+import DigitalReceipt from "./pages/DigitalReceipt";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -17,10 +19,25 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <main className="screen">
-        <div className="splash-card">
-          <p>Loading Smart Parking...</p>
-        </div>
+      <main className="screen splash-screen">
+        <section className="splash-card" style={{ padding: "40px" }}>
+          <div className="loader" style={{ 
+            width: "40px", 
+            height: "40px", 
+            border: "3px solid var(--border)", 
+            borderTop: "3px solid var(--primary)", 
+            borderRadius: "50%", 
+            margin: "0 auto 20px",
+            animation: "spin 1s linear infinite" 
+          }}></div>
+          <p style={{ color: "var(--text-muted)", fontWeight: 600 }}>Syncing Security Grid...</p>
+        </section>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </main>
     );
   }
@@ -74,6 +91,22 @@ export default function App() {
           element={
             <ProtectedRoute>
               <MapView />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/scan" 
+          element={
+            <ProtectedRoute>
+              <ScanParking />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/receipt" 
+          element={
+            <ProtectedRoute>
+              <DigitalReceipt />
             </ProtectedRoute>
           } 
         />

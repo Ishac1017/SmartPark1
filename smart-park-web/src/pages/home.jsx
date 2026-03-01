@@ -7,11 +7,12 @@ export default function Home() {
   const [garages, setGarages] = useState(parkingLots);
 
   const sortByPrice = () => {
-    setGarages([...garages].sort((a, b) => a.price - b.price));
+    setGarages([...garages].sort((a, b) => a.price_per_hour - b.price_per_hour));
   };
 
-  const sortByDistance = () => {
-    setGarages([...garages].sort((a, b) => a.distance - b.distance));
+  // Note: Simple alphabetical sort as a placeholder since 'distance' is now based on lat/lng
+  const sortByName = () => {
+    setGarages([...garages].sort((a, b) => a.name.localeCompare(b.name)));
   };
 
   return (
@@ -20,7 +21,7 @@ export default function Home() {
 
       <Filters
         sortByPrice={sortByPrice}
-        sortByDistance={sortByDistance}
+        sortByDistance={sortByName} 
       />
 
       {garages.map((g) => (

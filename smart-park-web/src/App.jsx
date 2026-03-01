@@ -6,30 +6,39 @@ import Home from "./pages/home";
 import ParkingDetails from "./pages/parkingDetails";
 import Dashboard from "./pages/dashboard";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useUserSync } from "./hooks/useUserSync";
 
 function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return isAuthenticated ? children : <div>Please log in to view this page.</div>;
+}
+
+function AppContent() {
+  useUserSync();
+  return (
+    <>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/parking/:id" element={<ParkingDetails />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default function App() {
   return (
     <BrowserRouter>
       <Auth0ProviderWrapper>
-        <NavBar />
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/parking/:id" element={<ParkingDetails />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+        <AppContent />
       </Auth0ProviderWrapper>
     </BrowserRouter>
   );

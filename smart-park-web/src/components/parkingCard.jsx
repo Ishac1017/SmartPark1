@@ -10,8 +10,8 @@ export default function ParkingCard({ garage }) {
       marginBottom: 20
     }}>
       <h3>{garage.name}</h3>
-      <p>Price: ${garage.price}/hr</p>
-      <p>Distance: {garage.distance} mins walk</p>
+      <p>Price: ${garage.price_per_hour}/hr</p>
+      <p>Capacity: {garage.capacity} spots</p>
       <Link to={`/parking/${garage.id}`}>View Details</Link>
     </div>
   );

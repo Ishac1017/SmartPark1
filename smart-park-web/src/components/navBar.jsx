@@ -5,29 +5,33 @@ import LoginButton from "./LoginButton.jsx";
 import LogoutButton from "./LogoutButton.jsx";
 
 export default function NavBar() {
-  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
-    <div style={{ 
-      padding: 20, 
+    <nav style={{ 
+      padding: '0 20px', 
       display: "flex", 
       justifyContent: "space-between", 
       alignItems: "center",
-      borderBottom: "1px solid #ddd"
+      borderBottom: "1px solid #ddd",
+      backgroundColor: "#fff",
+      height: "70px"
     }}>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <h2>Smart Parking</h2>
+      <Link to="/" style={{ textDecoration: "none", color: "#333" }}>
+        <h2 style={{ margin: 0 }}>Smart Parking</h2>
       </Link>
 
-      {isAuthenticated ? (
-        <>
-          <span>Hello, {user.name}</span>
-          <LogoutButton />
-          <Link to="/dashboard">Dashboard</Link>
-        </>
-      ) : (
-        <LoginButton />
-      )}
-    </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        {isAuthenticated ? (
+          <>
+            <span style={{ fontWeight: 500 }}>Hello, {user.name}</span>
+            <Link to="/dashboard" style={{ color: "#646cff", textDecoration: "none" }}>Dashboard</Link>
+            <LogoutButton />
+          </>
+        ) : (
+          <LoginButton />
+        )}
+      </div>
+    </nav>
   );
 }

@@ -1,7 +1,28 @@
 const parkingLots = [
-  { id: 1, name: "Main St Parking Garage", price: 5, distance: 4, capacity: 22 },
-  { id: 2, name: "Lincoln Lot", price: 3, distance: 7, capacity: 12 },
-  { id: 3, name: "Broadway Garage", price: 8, distance: 2, capacity: 8 }
+  { 
+    id: 1, 
+    name: "Main St Parking Garage", 
+    latitude: 40.7128, 
+    longitude: -74.0060, 
+    capacity: 22, 
+    price_per_hour: 5 
+  },
+  { 
+    id: 2, 
+    name: "Lincoln Lot", 
+    latitude: 40.7150, 
+    longitude: -74.0090, 
+    capacity: 12, 
+    price_per_hour: 3 
+  },
+  { 
+    id: 3, 
+    name: "Broadway Garage", 
+    latitude: 40.7100, 
+    longitude: -74.0100, 
+    capacity: 8, 
+    price_per_hour: 8 
+  }
 ];
 
 export default parkingLots;

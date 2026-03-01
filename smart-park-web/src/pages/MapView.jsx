@@ -18,8 +18,6 @@ export default function MapView() {
     </main>
   );
 
-  // Since I don't have a Google Maps API Key here, I'll use the search-based embed which doesn't always require a key for basic usage in some contexts,
-  // or use the standard embed with query.
   const simpleMapUrl = `https://maps.google.com/maps?q=${spot.lat || 0},${spot.lon || 0}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (

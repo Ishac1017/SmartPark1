@@ -4,9 +4,9 @@ export default function LoginButton() {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <button 
-      onClick={() => loginWithRedirect()} 
-      className="button login"
+    <button
+      onClick={() => loginWithRedirect({ appState: { returnTo: "/post-auth" } })}
+      className="primary-btn"
     >
       Log In
     </button>

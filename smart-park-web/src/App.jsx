@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -75,3 +76,39 @@ export default function App() {
     </BrowserRouter>
   );
 }
+=======
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// AUTH SCREENS
+import { AuthScreen } from "./auth/AuthScreen"; 
+// Create these next:
+import Signup from "./auth/Signup";
+import Login from "./auth/Login";
+
+// MAIN APP PAGES
+import Home from "./pages/home";
+import Dashboard from "./pages/dashboard";
+import ParkingDetails from "./pages/parkingDetails";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+
+        {/* AUTH */}
+        <Route path="/" element={<AuthScreen />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* MAIN PAGES */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/parking/:id" element={<ParkingDetails />} />
+        
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+>>>>>>> Stashed changes

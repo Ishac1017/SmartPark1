@@ -17,26 +17,40 @@ export default function ParkingCard({ garage, onSelect }) {
         }}>
           {isFillingUp ? "Filling Up" : "Available"}
         </div>
-        <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "#111827" }}>
-          ${garage.price}<span style={{ fontSize: "0.85rem", color: "#6b7280", fontWeight: 500 }}>/hr</span>
-        </div>
       </div>
 
       <h3 style={{ margin: "0 0 4px", fontSize: "1.2rem", color: "#111827" }}>{garage.name}</h3>
-      <p style={{ margin: "0 0 16px", color: "#6b7280", fontSize: "0.9rem" }}>{garage.address || "Walking distance to destination"}</p>
+      <p style={{ margin: "0 0 12px", color: "#6b7280", fontSize: "0.9rem" }}>{garage.address || "Walking distance to destination"}</p>
 
-      <div style={{ display: "flex", gap: "20px", borderTop: "1px solid #f1f5f9", paddingTop: "16px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "0.75rem", color: "#94a3b8", fontWeight: 600, textTransform: "uppercase" }}>Distance</span>
-          <span style={{ fontWeight: 700, color: "#334155" }}>{garage.distance} miles</span>
+      <div style={{ 
+        display: "flex", 
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: "12px", 
+        fontSize: "0.9rem",
+        color: "#64748b",
+        marginBottom: "8px"
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <span style={{ fontWeight: 600, color: "#334155" }}>{garage.travelTime} min</span>
+          <span>walk</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "0.75rem", color: "#94a3b8", fontWeight: 600, textTransform: "uppercase" }}>Spots Left</span>
-          <span style={{ fontWeight: 700, color: "#334155" }}>{garage.capacity}</span>
+        <span style={{ color: "#cbd5e1" }}>•</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <span style={{ fontWeight: 600, color: "#334155" }}>{garage.distance} mi</span>
+        </div>
+        <span style={{ color: "#cbd5e1" }}>•</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <span style={{ fontWeight: 600, color: "#334155" }}>{garage.capacity}</span>
+          <span>spots</span>
+        </div>
+        <span style={{ color: "#cbd5e1" }}>•</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <span style={{ fontWeight: 700, color: "#0b8f74" }}>${garage.price}/hr</span>
         </div>
       </div>
       
-      <button className="primary-btn" style={{ width: "100%", marginTop: "24px", padding: "12px" }}>
+      <button className="primary-btn" style={{ width: "100%", marginTop: "16px", padding: "12px" }}>
         Select This Spot
       </button>
     </div>

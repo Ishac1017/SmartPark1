@@ -20,7 +20,6 @@ export default function NavBar() {
             <>
               <div style={{ textAlign: "right", display: "flex", flexDirection: "column" }}>
                 <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#111827" }}>{user?.name}</span>
-                <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>Premium Member</span>
               </div>
               <button
                 className="secondary-btn"

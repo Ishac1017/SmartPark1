@@ -6,6 +6,7 @@ import AuthChoice from "./pages/AuthChoice";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import VehicleSelection from "./pages/VehicleSelection";
+import AddVehicle from "./pages/AddVehicle";
 import Search from "./pages/Search";
 import Results from "./pages/Results";
 import MapView from "./pages/MapView";
@@ -41,6 +42,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <VehicleSelection />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/add-vehicle" 
+          element={
+            <ProtectedRoute>
+              <AddVehicle />
             </ProtectedRoute>
           } 
         />

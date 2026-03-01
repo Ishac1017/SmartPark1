@@ -1,10 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/navBar";
+import { geocodeAddress } from "../services/geoapify";
 
 export default function Search() {
   const [location, setLocation] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleSearch = async (searchQuery) => {
+    const query = searchQuery || location;
+    if (!query.trim()) return;
+    setIsLoading(true);
+    const result = await geocodeAddress(query);
+    setIsLoading(false);
+    
+    if (result) {
+      navigate("/results", { state: { ...result, query } });
+    } else {
+      alert("Address not found. Please try again.");
+    }
+  };
 
   return (
     <main className="screen">
@@ -27,17 +43,21 @@ export default function Search() {
                 placeholder="e.g. Times Square, New York"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               />
             </label>
           </div>
 
           <div className="button-row">
-            <button className="primary-btn" onClick={() => navigate("/results")}>
-              Find Parking Spots
+            <button
+              className="primary-btn"
+              onClick={() => handleSearch()}
+              disabled={isLoading}
+            >
+              {isLoading ? "Searching..." : "Find Parking Spots"}
             </button>
           </div>
-        </section>
-      </div>
+          </section>      </div>
     </main>
   );
 }
